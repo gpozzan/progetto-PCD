@@ -12,16 +12,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Puzzle {
-    private Charset charset;
-    private HashMap<String, Fragment> fragmentIndex;
-    private ArrayList<Fragment> fragmentList;
-    PuzzlePiece boundary;  // rappresenta l'esterno del puzzle
-    public Puzzle(){
-	charset = StandardCharsets.UTF_8;
-	fragmentIndex = new HashMap<String, Fragment>();
-	fragmentList = new ArrayList<Fragment>();
-	boundary = new PuzzlePiece(this, "VUOTO", "", "", "", "", "");
-    }
+    private Charset charset = StandardCharsets.UTF_8;
+    private HashMap<String, Fragment> fragmentIndex = new HashMap<String, Fragment>();
+    private ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
+    final PuzzlePiece boundary = new PuzzlePiece(this, "VUOTO", "", "", "", "", "");  // rappresenta l'esterno del puzzle
+    public Puzzle(){}
     void addIndex(String index, Fragment reference){
 	fragmentIndex.put(index, reference);
     }
