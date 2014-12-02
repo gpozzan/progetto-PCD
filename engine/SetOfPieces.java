@@ -48,6 +48,7 @@ class SetOfPieces extends Fragment {
         pp.removeFromIndex(pp.getId());
     }
     private ArrayList<String> createMatrix(){
+	if(!boundaryPieces.isEmpty()) return null;
 	ArrayList<String> matrix = new ArrayList<String>();
 	PuzzlePiece ver = first;
 	do {
@@ -67,6 +68,7 @@ class SetOfPieces extends Fragment {
 	String tab = new String();	
 	PuzzlePiece pp = first;	
 	ArrayList<String> matrix = createMatrix();
+	if(matrix == null) return getPuzzle().error("Errore nella risoluzione del puzzle: non è stato trovato match per qualche id");
 	int nRow = matrix.size();
 	int nCol = (matrix.get(0)).length();
 	for(String s : matrix){

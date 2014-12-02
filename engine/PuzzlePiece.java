@@ -33,7 +33,7 @@ class PuzzlePiece extends Fragment {
 	}
 	return null;	
     }
-    boolean isBoundaryPiece() {	
+    boolean isBoundaryPiece() {
 	return (neighborsRef[0] == null || neighborsRef[1] == null || neighborsRef[2] == null || neighborsRef[3] == null);
     }
     void connect(PuzzlePiece pp, int i){
@@ -41,7 +41,6 @@ class PuzzlePiece extends Fragment {
 	// connette this e pp nella direzione i-esima
 	setNeighbor(pp, i);
 	pp.setNeighbor(this, (i+2)%4);
-	//System.out.println(">>>>connetto " + pp.getId() + " set : " + pp.getIdSet() +  " e " + getId() + " set: " + getIdSet());
     }
     private int indexOfNeighbor(String nid) {
 	// dato l'id di un vicino restituisce la direzione in cui trovarlo

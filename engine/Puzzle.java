@@ -32,12 +32,20 @@ public class Puzzle {
     void removeList(Fragment reference){
 	fragmentList.remove(reference);
     }
+    String error(String outputText){
+	System.err.println(outputText);
+	return outputText;
+    }
     public String solve(Path inputPath){
 	fragmentIndex.put("VUOTO", boundary);
 	try (BufferedReader reader = Files.newBufferedReader(inputPath, charset)){
 		String line = null;
 		while((line = reader.readLine()) != null){
 		    String[] pt = line.split("\t");
+		    if (pt[1].length() > 1){
+			//potenziale errore nel file di input: invece di un carattere trovo una stringa			
+			return error("Errore nel file di input: una tessera contiene più di un carattere");
+		    }
 		    PuzzlePiece pp = new PuzzlePiece(this, pt[0], pt[1], pt[2], pt[3], pt[4], pt[5]);
 		    String ppNeighbor = pp.findNeighbor();
 		    if(ppNeighbor != null) pp.merge(fragmentIndex.get(ppNeighbor));
@@ -46,11 +54,18 @@ public class Puzzle {
 		}
 	    } catch (IOException e){
 	    System.err.println(e);
-	}        
-	while(fragmentList.size() > 1){       
+	} catch (IndexOutOfBoundsException e){
+	    //potenziale errore nel file di input: il file di input contiene righe vuote	    
+	    return error("Errore nel file di input: scorretta formattazione, sono forse presenti righe vuote nel file?");
+	}	
+	while(fragmentList.size() > 1){
+	    int sizeCheck = fragmentList.size();
 	    Fragment f1 = fragmentList.get(0);	   
 	    String n = f1.findNeighbor();	    	    
-	    f1.merge(fragmentIndex.get(n));
+	    f1.merge(fragmentIndex.get(n));	    
+	    if(fragmentList.size() >= sizeCheck){		
+		return error("Errore nella risoluzione del puzzle: non è stato trovato match per qualche id");
+	    }
 	}	
 	return (fragmentList.get(0)).print();   
     }
