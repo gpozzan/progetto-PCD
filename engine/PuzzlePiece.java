@@ -1,9 +1,9 @@
 package engine;
 
 class PuzzlePiece extends Fragment {
-    private String id; private String character;
+    private final String id; private final String character;
     // neighbors contiene gli id delle tessere confinanti
-    private String[] neighbors;
+    private final String[] neighbors;
     // neighborsRef contiene i riferimenti alle tessere confinanti
     private PuzzlePiece[] neighborsRef;    
     PuzzlePiece(Puzzle pr, String i, String ch, String n, String e, String s, String w){
