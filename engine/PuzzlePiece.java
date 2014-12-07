@@ -17,8 +17,7 @@ class PuzzlePiece extends Fragment {
 	}	
     }
     String findNeighbor() {	
-	for(int i = 0; i < 4; i++){
-	    //System.out.println("per " + getId() + " considero il confine " + i);
+	for(int i = 0; i < 4; i++){	    
 	    if(neighborsRef[i] == null){
 		// se la cella i-esima di neighborsRef è null vuol dire che nella direzione i-esima
 		// si può trovare e collegare un PuzzlePiece 
@@ -50,19 +49,16 @@ class PuzzlePiece extends Fragment {
 	return -1;
     }
     void merge(Fragment f){
-	if(f instanceof PuzzlePiece){
-	    //caso merge1 (nota: unica occasione in cui vengono creati nuovi SetOfPieces)
+	if(f instanceof PuzzlePiece){	    
 	    PuzzlePiece fpp = (PuzzlePiece)f;
 	    connect(fpp, indexOfNeighbor(fpp.getId()));
 	    String newIdSet = id + "set";
 	    SetOfPieces sop = new SetOfPieces(newIdSet, getPuzzle());
 	    removeFromList(); fpp.removeFromList();
 	    sop.addPiece(this); sop.addPiece(fpp);	    
-	    sop.addToList(); sop.addToIndex();
-	    //System.out.println("aggiungo a fragmentlist " + sop.getIdSet());	    	    
+	    sop.addToList(); sop.addToIndex();	     	    
 	}
-	else if(f instanceof SetOfPieces) {
-	    //caso merge2
+	else if(f instanceof SetOfPieces) {	   
 	    SetOfPieces fsop = (SetOfPieces)f;
 	    for(int i = 0; i < 4; i++){
 		//controllo tutti i vicini e connetto quelli appartenenti a fsop se non già connessi

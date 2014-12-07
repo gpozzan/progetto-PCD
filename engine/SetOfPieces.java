@@ -15,13 +15,11 @@ class SetOfPieces extends Fragment {
 	listOfPieces.add(pp);
 	pp.setIdSet(getIdSet());
 	if(pp.isBoundaryPiece()) boundaryPieces.add(pp);
-	if((pp.getNeighbor(0)).equals("VUOTO") && (pp.getNeighbor(3).equals("VUOTO"))) first = pp;
-	//System.out.println("aggiungo " + pp.getId() + " a gruppo " + getIdSet());	
+	if((pp.getNeighbor(0)).equals("VUOTO") && (pp.getNeighbor(3).equals("VUOTO"))) first = pp;		
     }
     void addList(SetOfPieces sop){
 	listOfPieces.addAll(sop.listOfPieces);	
-	boundaryPieces.addAll(sop.boundaryPieces);
-	//System.out.println("aggiungo gruppo " + sop.getIdSet() + " a " + getIdSet());
+	boundaryPieces.addAll(sop.boundaryPieces);	
 	if(sop.getFirst() != null) first = sop.getFirst();	
     }    
     String findNeighbor() {
@@ -88,21 +86,17 @@ class SetOfPieces extends Fragment {
 	}
     }
     void merge(Fragment f){
-	if(f instanceof PuzzlePiece){
-	    //caso merge3
+	if(f instanceof PuzzlePiece){	   
 	    PuzzlePiece pp = (PuzzlePiece)f;
 	    pp.merge(this);	    
 	}
-	else if(f instanceof SetOfPieces){
-	    //caso merge4
+	else if(f instanceof SetOfPieces){	   
 	    ArrayList<PuzzlePiece> toRemove = new ArrayList<PuzzlePiece>();
 	    SetOfPieces fsop = (SetOfPieces)f;	    
 	    for(PuzzlePiece bp : boundaryPieces){
 		// per ogni elemento di confine controlla tra i suoi vicini quali appartengano
-		// al gruppo fsop e li collega
-		//System.out.println("lavoro sul pezzo " + bp.getId());
-		for(int i = 0; i<4; i++){
-		    //System.out.println("controllo il confine " + i);
+		// al gruppo fsop e li collega	
+		for(int i = 0; i<4; i++){		    
 		    String iNeighbor = bp.getNeighbor(i);
 		    Fragment neighbor = getIndex(iNeighbor);		    
 		    String neighborSet = "";

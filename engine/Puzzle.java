@@ -47,6 +47,7 @@ public class Puzzle {
 			return error("Errore nel file di input: una tessera contiene più di un carattere");
 		    }
 		    PuzzlePiece pp = new PuzzlePiece(this, pt[0], pt[1], pt[2], pt[3], pt[4], pt[5]);
+		    //controllo se posso già collegare la tessera a un frammento esistente
 		    String ppNeighbor = pp.findNeighbor();
 		    if(ppNeighbor != null) pp.merge(fragmentIndex.get(ppNeighbor));
 		    else fragmentList.add(pp);
@@ -58,11 +59,11 @@ public class Puzzle {
 	    //potenziale errore nel file di input: il file di input contiene righe vuote	    
 	    return error("Errore nel file di input: scorretta formattazione, sono forse presenti righe vuote nel file?");
 	}	
-	while(fragmentList.size() > 1){
+	while(fragmentList.size() > 1){	    
 	    int sizeCheck = fragmentList.size();
-	    Fragment f1 = fragmentList.get(0);	   
-	    String n = f1.findNeighbor();	    	    
-	    f1.merge(fragmentIndex.get(n));	    
+	    Fragment f1 = fragmentList.get(0); //recupero il primo frammento nella lista	   
+	    String n = f1.findNeighbor(); //trovo un vicino di tale frammento
+	    f1.merge(fragmentIndex.get(n)); //unisco i due frammenti	    
 	    if(fragmentList.size() >= sizeCheck){		
 		return error("Errore nella risoluzione del puzzle: non è stato trovato match per qualche id");
 	    }
