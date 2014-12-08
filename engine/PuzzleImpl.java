@@ -46,7 +46,7 @@ public class PuzzleImpl implements Puzzle {
 			//potenziale errore nel file di input: invece di un carattere trovo una stringa			
 			return error("Errore nel file di input: una tessera contiene più di un carattere");
 		    }
-		    PuzzlePiece pp = new PuzzlePiece(this, pt[0], pt[1], pt[2], pt[3], pt[4], pt[5]);
+		    Fragment pp = new PuzzlePiece(this, pt[0], pt[1], pt[2], pt[3], pt[4], pt[5]);
 		    //controllo se posso già collegare la tessera a un frammento esistente
 		    String ppNeighbor = pp.findNeighbor();
 		    if(ppNeighbor != null) pp.merge(fragmentIndex.get(ppNeighbor));
