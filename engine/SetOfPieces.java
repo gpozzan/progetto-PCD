@@ -2,11 +2,11 @@ package engine;
 
 import java.util.ArrayList;
 
-class SetOfPieces extends Fragment {
+class SetOfPieces extends AbstractFragment {
     private ArrayList<PuzzlePiece> listOfPieces;
     private ArrayList<PuzzlePiece> boundaryPieces;
     private PuzzlePiece first = null;    
-    SetOfPieces(String id, Puzzle pr){
+    SetOfPieces(String id, PuzzleImpl pr){
 	super(id, pr);
 	listOfPieces = new ArrayList<PuzzlePiece>();
 	boundaryPieces = new ArrayList<PuzzlePiece>();	
@@ -22,7 +22,7 @@ class SetOfPieces extends Fragment {
 	boundaryPieces.addAll(sop.boundaryPieces);	
 	if(sop.getFirst() != null) first = sop.getFirst();	
     }    
-    String findNeighbor() {
+    public String findNeighbor() {
 	if(!boundaryPieces.isEmpty()){	    
 	    return (boundaryPieces.get(0)).findNeighbor();
 	}
@@ -61,7 +61,7 @@ class SetOfPieces extends Fragment {
 	} while(!(ver.getId()).equals("VUOTO"));
 	return matrix;
     } 
-    String print(){
+    public String print(){
 	String sent = new String();
 	String tab = new String();	
 	PuzzlePiece pp = first;	
@@ -85,7 +85,7 @@ class SetOfPieces extends Fragment {
 	    pp.setIdSet(getIdSet());
 	}
     }
-    void merge(Fragment f){
+    public void merge(Fragment f){
 	if(f instanceof PuzzlePiece){	   
 	    PuzzlePiece pp = (PuzzlePiece)f;
 	    pp.merge(this);	    
@@ -98,7 +98,7 @@ class SetOfPieces extends Fragment {
 		// al gruppo fsop e li collega	
 		for(int i = 0; i<4; i++){		    
 		    String iNeighbor = bp.getNeighbor(i);
-		    Fragment neighbor = getIndex(iNeighbor);		    
+		    AbstractFragment neighbor = (AbstractFragment)getIndex(iNeighbor);		    
 		    String neighborSet = "";
 		    // neighbor potrebbe essere stato rimosso da fragmentIndex (perché non più di confine)
 		    if(neighbor != null) neighborSet = neighbor.getIdSet();

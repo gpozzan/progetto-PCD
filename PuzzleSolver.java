@@ -21,7 +21,7 @@ public class PuzzleSolver{
 	String outputFile = args[1];
 	Path inputPath = Paths.get(inputFile);
 	Path outputPath = Paths.get(outputFile);
-	Puzzle p = new Puzzle();
+	Puzzle p = new PuzzleImpl();
 	String output = p.solve(inputPath);
 	printOutput(output, outputPath);
     }

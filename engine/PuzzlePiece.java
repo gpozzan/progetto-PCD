@@ -1,12 +1,12 @@
 package engine;
 
-class PuzzlePiece extends Fragment {
+class PuzzlePiece extends AbstractFragment {
     private final String id; private final String character;
     // neighbors contiene gli id delle tessere confinanti
     private final String[] neighbors;
     // neighborsRef contiene i riferimenti alle tessere confinanti
     private PuzzlePiece[] neighborsRef;    
-    PuzzlePiece(Puzzle pr, String i, String ch, String n, String e, String s, String w){
+    PuzzlePiece(PuzzleImpl pr, String i, String ch, String n, String e, String s, String w){
 	super(i, pr);
 	id = i; character = ch;
 	neighbors = new String[]{n, e, s, w};
@@ -16,7 +16,7 @@ class PuzzlePiece extends Fragment {
 	    if(neighbors[j].equals("VUOTO")) neighborsRef[j] = getBoundary();
 	}	
     }
-    String findNeighbor() {	
+    public String findNeighbor() {	
 	for(int i = 0; i < 4; i++){	    
 	    if(neighborsRef[i] == null){
 		// se la cella i-esima di neighborsRef è null vuol dire che nella direzione i-esima
@@ -48,7 +48,7 @@ class PuzzlePiece extends Fragment {
 	}
 	return -1;
     }
-    void merge(Fragment f){
+    public void merge(Fragment f){
 	if(f instanceof PuzzlePiece){	    
 	    PuzzlePiece fpp = (PuzzlePiece)f;
 	    connect(fpp, indexOfNeighbor(fpp.getId()));
@@ -88,7 +88,7 @@ class PuzzlePiece extends Fragment {
     void setNeighbor(PuzzlePiece pp, int i){
 	neighborsRef[i] = pp;
     }    
-    String print(){
+    public String print(){
 	String s = character + "\n" + "\n" + character + "\n" + "\n" + "1 1";
 	return s;
     }
