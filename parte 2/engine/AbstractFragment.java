@@ -2,8 +2,8 @@ package engine;
 
 abstract class AbstractFragment implements Fragment {
     private String idSet;
-    private final PuzzleImpl puzzleRef;
-    AbstractFragment(String id, PuzzleImpl pr){
+    private final AbstractPuzzle puzzleRef;
+    AbstractFragment(String id, AbstractPuzzle pr){
 	idSet = id;
 	puzzleRef = pr;
     }
@@ -13,7 +13,7 @@ abstract class AbstractFragment implements Fragment {
     String getIdSet(){
 	return idSet;
     }
-    PuzzleImpl getPuzzle(){
+    AbstractPuzzle getPuzzle(){
 	return puzzleRef;
     }
     void setIdSet(String nid){
@@ -35,6 +35,6 @@ abstract class AbstractFragment implements Fragment {
 	return puzzleRef.getIndex(index);
     }
     PuzzlePiece getBoundary(){
-	return puzzleRef.boundary;
+	return puzzleRef.getBoundary();
     }
 }

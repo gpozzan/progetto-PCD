@@ -12,6 +12,7 @@ CLASSES = \
 	./engine/Puzzle.java \
 	./engine/PuzzleImpl.java \
 	./engine/ConcurrentPuzzleImpl.java \
+	./engine/AbstractPuzzle.java \
 	./PuzzleSolver.java 
 
 default: classes

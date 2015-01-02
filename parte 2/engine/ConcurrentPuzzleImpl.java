@@ -2,22 +2,23 @@ package engine;
 
 import java.nio.file.Path;
 
-public class ConcurrentPuzzleImpl implements Puzzle {
-    private PuzzleImpl pi;
+public class ConcurrentPuzzleImpl extends AbstractPuzzle {
     synchronized void addIndex(String index, Fragment reference){
-	pi.addIndex(index,reference);
+	super.addIndex(index,reference);
     }
     synchronized void removeIndex(String index){
-	pi.removeIndex(index);
+	super.removeIndex(index);
     }
     synchronized Fragment getIndex(String index){
-	return pi.getIndex(index);
+	return super.getIndex(index);
     }
     synchronized void addList(Fragment reference){
-	pi.addList(reference);
+	super.addList(reference);
     }
     synchronized void removeList(Fragment reference){
-	pi.removeList(reference);
+	super.removeList(reference);
     }
-    public String solve(Path inputPath){return "";}
+    public String solve(Path inputPath){
+	return "";
+    }
 }

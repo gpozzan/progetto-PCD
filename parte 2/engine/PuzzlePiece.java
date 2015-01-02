@@ -6,7 +6,7 @@ class PuzzlePiece extends AbstractFragment {
     private final String[] neighbors;
     // neighborsRef contiene i riferimenti alle tessere confinanti
     private PuzzlePiece[] neighborsRef;    
-    PuzzlePiece(PuzzleImpl pr, String i, String ch, String n, String e, String s, String w){
+    PuzzlePiece(AbstractPuzzle pr, String i, String ch, String n, String e, String s, String w){
 	super(i, pr);
 	id = i; character = ch;
 	neighbors = new String[]{n, e, s, w};

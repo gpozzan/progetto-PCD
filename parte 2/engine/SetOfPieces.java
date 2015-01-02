@@ -6,7 +6,7 @@ class SetOfPieces extends AbstractFragment {
     private ArrayList<PuzzlePiece> listOfPieces;
     private ArrayList<PuzzlePiece> boundaryPieces;
     private PuzzlePiece first = null;    
-    SetOfPieces(String id, PuzzleImpl pr){
+    SetOfPieces(String id, AbstractPuzzle pr){
 	super(id, pr);
 	listOfPieces = new ArrayList<PuzzlePiece>();
 	boundaryPieces = new ArrayList<PuzzlePiece>();	
