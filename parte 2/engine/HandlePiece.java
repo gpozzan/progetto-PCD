@@ -1,5 +1,7 @@
 package engine;
 
+import java.util.ArrayList;
+
 class HandlePiece implements Runnable{
     private PuzzlePiece piece;
     private AbstractPuzzle puzzle;
@@ -9,8 +11,10 @@ class HandlePiece implements Runnable{
     }
     public void run(){
 	synchronized(puzzle){
-	    String pieceNeighbor = piece.findNeighbor();
-	    if(pieceNeighbor != null) piece.merge(puzzle.getIndex(pieceNeighbor));
+	    ArrayList<String> pieceNeighbor = piece.findNeighbor();
+	    if(pieceNeighbor.size() > 0) 
+		for(String id : pieceNeighbor)
+		    piece.merge(puzzle.getIndex(id));
 	    else puzzle.addList(piece);
 	    puzzle.addIndex(piece.getId(), piece);
 	}

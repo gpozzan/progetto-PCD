@@ -1,5 +1,7 @@
 package engine;
 
+import java.util.ArrayList;
+
 class PuzzlePiece extends AbstractFragment {
     private final String id; private final String character;
     // neighbors contiene gli id delle tessere confinanti
@@ -16,7 +18,8 @@ class PuzzlePiece extends AbstractFragment {
 	    if(neighbors[j].equals("VUOTO")) neighborsRef[j] = getBoundary();
 	}	
     }
-    public String findNeighbor() {	
+    public ArrayList<String> findNeighbor() {
+	ArrayList<String> res = new ArrayList<String>();
 	for(int i = 0; i < 4; i++){	    
 	    if(neighborsRef[i] == null){
 		// se la cella i-esima di neighborsRef è null vuol dire che nella direzione i-esima
@@ -25,12 +28,11 @@ class PuzzlePiece extends AbstractFragment {
 		Fragment f = getIndex(neighbors[i]);
 		if(f != null){
 		    PuzzlePiece pp = (PuzzlePiece)f;		
-		    return pp.getIdSet();
-		}
-		return null;
+		    if(!res.contains(pp.getIdSet())) res.add(pp.getIdSet());
+		}		
 	    }
 	}
-	return null;	
+	return res;	
     }
     boolean isBoundaryPiece() {
 	return (neighborsRef[0] == null || neighborsRef[1] == null || neighborsRef[2] == null || neighborsRef[3] == null);

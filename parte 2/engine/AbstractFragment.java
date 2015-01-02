@@ -1,5 +1,7 @@
 package engine;
 
+import java.util.ArrayList;
+
 abstract class AbstractFragment implements Fragment {
     private String idSet;
     private final AbstractPuzzle puzzleRef;
@@ -7,7 +9,7 @@ abstract class AbstractFragment implements Fragment {
 	idSet = id;
 	puzzleRef = pr;
     }
-    public abstract String findNeighbor(); // restituisce l'id di un PuzzlePiece confinante con questo Fragment
+    public abstract ArrayList<String> findNeighbor(); // restituisce l'id di un PuzzlePiece confinante con questo Fragment
     public abstract void merge(Fragment f); // unisce due Fragment
     public abstract String print(); // crea una stringa formattata secondo le specifiche date
     String getIdSet(){

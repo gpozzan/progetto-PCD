@@ -22,11 +22,17 @@ class SetOfPieces extends AbstractFragment {
 	boundaryPieces.addAll(sop.boundaryPieces);	
 	if(sop.getFirst() != null) first = sop.getFirst();	
     }    
-    public String findNeighbor() {
-	if(!boundaryPieces.isEmpty()){	    
-	    return (boundaryPieces.get(0)).findNeighbor();
+    public ArrayList<String> findNeighbor() {
+	ArrayList<String> res = new ArrayList<String>();
+	if(!boundaryPieces.isEmpty()){
+	    for(PuzzlePiece pp : boundaryPieces){
+		ArrayList<String> partRes = pp.findNeighbor();
+		for(String s : partRes){
+		    if(!res.contains(s)) res.add(s);
+		}		
+	    }
 	}
-	return null;
+	return res;
     }
     PuzzlePiece getPiece(String id){
 	//controlla se un PuzzlePiece con identificativo = id fa parte del gruppo

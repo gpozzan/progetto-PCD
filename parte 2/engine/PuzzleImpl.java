@@ -25,8 +25,8 @@ public class PuzzleImpl extends AbstractPuzzle {
 		    }
 		    Fragment pp = new PuzzlePiece(this, pt[0], pt[1], pt[2], pt[3], pt[4], pt[5]);
 		    //controllo se posso già collegare la tessera a un frammento esistente
-		    String ppNeighbor = pp.findNeighbor();
-		    if(ppNeighbor != null) pp.merge(getIndex(ppNeighbor));
+		    ArrayList<String> ppNeighbor = pp.findNeighbor();
+		    if(ppNeighbor.size() > 0) pp.merge(getIndex(ppNeighbor.get(0)));
 		    else addList(pp);
 		    addIndex(pt[0], pp);		    		    
 		}
@@ -39,8 +39,8 @@ public class PuzzleImpl extends AbstractPuzzle {
 	while(getListSize() > 1){	    
 	    int sizeCheck = getListSize();
 	    Fragment f1 = getList(0); //recupero il primo frammento nella lista	   
-	    String n = f1.findNeighbor(); //trovo un vicino di tale frammento
-	    f1.merge(getIndex(n)); //unisco i due frammenti	    
+	    ArrayList<String> n = f1.findNeighbor(); //trovo un vicino di tale frammento
+	    f1.merge(getIndex(n.get(0))); //unisco i due frammenti	    
 	    if(getListSize() >= sizeCheck){		
 		return error("Errore nella risoluzione del puzzle: non è stato trovato match per qualche id");
 	    }
