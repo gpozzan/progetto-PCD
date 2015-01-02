@@ -14,6 +14,7 @@ CLASSES = \
 	./engine/ConcurrentPuzzleImpl.java \
 	./engine/AbstractPuzzle.java \
 	./engine/HandlePiece.java \
+	./engine/FixFragments.java \
 	./PuzzleSolver.java 
 
 default: classes

@@ -11,6 +11,9 @@ abstract class AbstractPuzzle implements Puzzle {
     private HashMap<String, Fragment> fragmentIndex = new HashMap<String, Fragment>();
     private ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
     private final PuzzlePiece boundary = new PuzzlePiece(this, "VUOTO", "", "", "", "", "");
+    ArrayList<Fragment> getList(){
+	return fragmentList;
+    }
     int getListSize(){
 	return fragmentList.size();
     }

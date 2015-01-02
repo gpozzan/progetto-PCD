@@ -5,7 +5,7 @@ import java.util.ArrayList;
 class HandlePiece implements Runnable{
     private PuzzlePiece piece;
     private AbstractPuzzle puzzle;
-    public HandlePiece(PuzzlePiece pp, AbstractPuzzle ap){
+    HandlePiece(PuzzlePiece pp, AbstractPuzzle ap){
 	piece = pp;
 	puzzle = ap;
     }
@@ -15,7 +15,10 @@ class HandlePiece implements Runnable{
 	    if(pieceNeighbor.size() > 0) 
 		for(String id : pieceNeighbor)
 		    piece.merge(puzzle.getIndex(id));
-	    else puzzle.addList(piece);
+	    else{
+		puzzle.addList(piece);
+		puzzle.notify();
+	    }
 	    puzzle.addIndex(piece.getId(), piece);
 	}
     }
