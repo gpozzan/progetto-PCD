@@ -11,6 +11,7 @@ CLASSES = \
         ./engine/SetOfPieces.java \
 	./engine/Puzzle.java \
 	./engine/PuzzleImpl.java \
+	./engine/ConcurrentPuzzleImpl.java \
 	./PuzzleSolver.java 
 
 default: classes
@@ -19,3 +20,4 @@ classes: $(CLASSES:.java=.class)
 
 clean:
 	$(RM) *.class
+	$(RM) ./engine/*.class
