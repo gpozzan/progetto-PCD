@@ -40,6 +40,7 @@ class PuzzlePiece extends AbstractFragment {
     void connect(PuzzlePiece pp, int i){
 	// PRE: this e pp sono confinanti nella direzione i-esima
 	// connette this e pp nella direzione i-esima
+	//System.out.println("connetto " + getId() +"(" +getIdSet()+")"+ " e " + pp.getId()+"(" + pp.getIdSet()+")");
 	setNeighbor(pp, i);
 	pp.setNeighbor(this, (i+2)%4);
     }

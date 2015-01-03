@@ -24,3 +24,4 @@ classes: $(CLASSES:.java=.class)
 clean:
 	$(RM) *.class
 	$(RM) ./engine/*.class
+	$(RM) *.txt

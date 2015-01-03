@@ -98,16 +98,19 @@ class SetOfPieces extends AbstractFragment {
 	}
 	else if(f instanceof SetOfPieces){	   
 	    ArrayList<PuzzlePiece> toRemove = new ArrayList<PuzzlePiece>();
-	    SetOfPieces fsop = (SetOfPieces)f;	    
+	    SetOfPieces fsop = (SetOfPieces)f;
+	    //System.out.println("Sop ====== " + fsop.getIdSet());
 	    for(PuzzlePiece bp : boundaryPieces){
 		// per ogni elemento di confine controlla tra i suoi vicini quali appartengano
-		// al gruppo fsop e li collega	
+		// al gruppo fsop e li collega
+		//System.out.println("SoP->considero " + bp.getId());
 		for(int i = 0; i<4; i++){		    
 		    String iNeighbor = bp.getNeighbor(i);
 		    AbstractFragment neighbor = (AbstractFragment)getIndex(iNeighbor);		    
 		    String neighborSet = "";
 		    // neighbor potrebbe essere stato rimosso da fragmentIndex (perché non più di confine)
 		    if(neighbor != null) neighborSet = neighbor.getIdSet();
+		    //System.out.println("    " + neighborSet);
 		    if(neighborSet.equals(fsop.getIdSet())){			
 			PuzzlePiece pp = fsop.getPiece(iNeighbor);		
 			bp.connect(pp, i);		
@@ -116,7 +119,7 @@ class SetOfPieces extends AbstractFragment {
 		    }
 		}
 	    }
-	    addList(fsop); //incorporta la lista di fsop
+	    addList(fsop); //incorpora la lista di fsop
 	    fixIdSet(fsop);
 	    fixBoundaries(toRemove);
 	    fsop.removeFromList();//rimuove fsop dalla lista dei frammenti del puzzle

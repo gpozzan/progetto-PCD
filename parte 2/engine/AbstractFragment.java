@@ -19,6 +19,7 @@ abstract class AbstractFragment implements Fragment {
 	return puzzleRef;
     }
     void setIdSet(String nid){
+	//System.out.println(getIdSet()+"-->"+nid);
 	idSet = nid;
     }
     void addToIndex(){
