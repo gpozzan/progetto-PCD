@@ -13,13 +13,11 @@ import java.util.concurrent.TimeUnit;
 
 
 public class ConcurrentPuzzleImpl extends AbstractPuzzle {
-    private static final ExecutorService exec = Executors.newFixedThreadPool(20);
-    synchronized void addIndex(String index, Fragment reference){
-	//System.out.println("Aggiungo a index -> " + ((AbstractFragment)reference).getIdSet());
+    private static final ExecutorService exec = Executors.newCachedThreadPool();
+    synchronized void addIndex(String index, Fragment reference){	
 	super.addIndex(index,reference);
     }
-    synchronized void removeIndex(String index){
-	//System.out.println("Rimuovo da index -> " + index);
+    synchronized void removeIndex(String index){	
 	super.removeIndex(index);
     }
     synchronized Fragment getIndex(String index){
@@ -35,7 +33,6 @@ public class ConcurrentPuzzleImpl extends AbstractPuzzle {
 	wait();
     }
     public String solve(Path inputPath){
-	//final long startTime = System.currentTimeMillis();
 	addIndex("VUOTO", getBoundary());
 	try (BufferedReader reader = Files.newBufferedReader(inputPath, getCharset())){
 		String line = null;
@@ -46,23 +43,18 @@ public class ConcurrentPuzzleImpl extends AbstractPuzzle {
 		    }
 		    Fragment pp = new PuzzlePiece(this, pt[0], pt[1], pt[2], pt[3], pt[4], pt[5]);
 		    HandlePiece hp = new HandlePiece((PuzzlePiece)pp, this);
-		    //System.out.println(">>Nuovo hp");
 		    exec.execute(hp);		    
 		}		
 	    } catch (IOException e){
 	    System.err.println(e);
 	} catch (IndexOutOfBoundsException e){
 	    return error("Errore nel file di input: scorretta formattazione, sono forse presenti righe vuote nel file?");
-	}
-	//System.out.println("Fine ciclo while");
+	}	
 	exec.shutdown();
         try {
 	    exec.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
 	} catch (InterruptedException e) {}
-	//System.out.println(getListSize());
-	//System.out.println("============WHILE FINALE===============");
-	while(getListSize() > 1){
-	    //System.out.println("Lista dim -> " + getListSize());
+	while(getListSize() > 1){	    
 	    int sizeCheck = getListSize();
 	    Fragment f1 = getList(0);   
 	    ArrayList<String> n = f1.findNeighbor();
@@ -72,8 +64,6 @@ public class ConcurrentPuzzleImpl extends AbstractPuzzle {
 		return error("Errore nella risoluzione del puzzle: non è stato trovato match per qualche id");
 	    }
 	}
-	//final long endTime = System.currentTimeMillis();
-	//System.out.println("Tempo di esecuzione : " + (endTime-startTime));
         return (getList(0)).print();  
     }
 }

@@ -3,28 +3,22 @@ package engine;
 import java.util.ArrayList;
 
 class PuzzlePiece extends AbstractFragment {
-    private final String id; private final String character;
-    // neighbors contiene gli id delle tessere confinanti
-    private final String[] neighbors;
-    // neighborsRef contiene i riferimenti alle tessere confinanti
+    private final String id; private final String character;    
+    private final String[] neighbors;    
     private PuzzlePiece[] neighborsRef;    
     PuzzlePiece(AbstractPuzzle pr, String i, String ch, String n, String e, String s, String w){
 	super(i, pr);
 	id = i; character = ch;
 	neighbors = new String[]{n, e, s, w};
 	neighborsRef = new PuzzlePiece[]{null, null, null, null};
-	for(int j = 0; j < 4; j++){
-	    // PuzzleSolver.boundary è un PuzzlePiece che rappresenta l'esterno del puzzle
+	for(int j = 0; j < 4; j++){	    
 	    if(neighbors[j].equals("VUOTO")) neighborsRef[j] = getBoundary();
 	}	
     }
     public ArrayList<String> findNeighbor() {
 	ArrayList<String> res = new ArrayList<String>();
 	for(int i = 0; i < 4; i++){	    
-	    if(neighborsRef[i] == null){
-		// se la cella i-esima di neighborsRef è null vuol dire che nella direzione i-esima
-		// si può trovare e collegare un PuzzlePiece 
-		// (l'esterno è rappresentato dal PuzzlePiece PuzzleSolver.boundary)
+	    if(neighborsRef[i] == null){		
 		Fragment f = getIndex(neighbors[i]);
 		if(f != null){
 		    PuzzlePiece pp = (PuzzlePiece)f;		
@@ -37,15 +31,11 @@ class PuzzlePiece extends AbstractFragment {
     boolean isBoundaryPiece() {
 	return (neighborsRef[0] == null || neighborsRef[1] == null || neighborsRef[2] == null || neighborsRef[3] == null);
     }
-    void connect(PuzzlePiece pp, int i){
-	// PRE: this e pp sono confinanti nella direzione i-esima
-	// connette this e pp nella direzione i-esima
-	//System.out.println("connetto " + getId() +"(" +getIdSet()+")"+ " e " + pp.getId()+"(" + pp.getIdSet()+")");
+    void connect(PuzzlePiece pp, int i){	
 	setNeighbor(pp, i);
 	pp.setNeighbor(this, (i+2)%4);
     }
-    private int indexOfNeighbor(String nid) {
-	// dato l'id di un vicino restituisce la direzione in cui trovarlo
+    private int indexOfNeighbor(String nid) {	
 	for(int i = 0; i < 4; i++) {
 	    if(neighbors[i].equals(nid)) return i;
 	}
@@ -64,7 +54,6 @@ class PuzzlePiece extends AbstractFragment {
 	else if(f instanceof SetOfPieces) {	   
 	    SetOfPieces fsop = (SetOfPieces)f;
 	    for(int i = 0; i < 4; i++){
-		//controllo tutti i vicini e connetto quelli appartenenti a fsop se non già connessi
 		PuzzlePiece pp = fsop.getPiece(neighbors[i]);
 	        if(pp != null && neighborsRef[i] == null){ 
 		    connect(pp, i);
